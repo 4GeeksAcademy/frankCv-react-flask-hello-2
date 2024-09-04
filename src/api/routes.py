@@ -52,20 +52,34 @@ def handle_login():
     try:
         email = request.json.get('email')
         password = request.json.get('password')
-
         if not email or not password:
-            return jsonify({"msg":"All Fields are required (email,password)"}),400
-        
+            return jsonify({"msg":"All Fields are required (email,password)"}),400        
         current_user = User.query.filter_by(email=email).first()
-
         if not current_user:
             return jsonify({"msg":"Wrong credentials"}),404
-
         user_id = current_user.id
+        access_token = create_access_token(identity=user_id)        
+        return jsonify({"msg":"Successful Login","token":access_token,"email":current_user.email}),200
+    except Exception as e:
+        return jsonify({"msg":"Internal Server Error","error":str(e)}),500
 
-        access_token = create_access_token(identity=user_id)
-        
-        return jsonify({"msg":"Successful Login","token":access_token}),200
+@api.route('/users',methods=['GET'])
+@jwt_required()
+def show_users():
+    try:
+        # get_jwt_identity 
+        current_user_id = get_jwt_identity()
+        if(current_user_id):
+            users = User.query.all()
+            user_list = []
+            for user in users:
+                user_dict = {
+                    "id":user.id,
+                    "email":user.email,
+                    "name":user.name
+                }
+                user_list.append(user_dict)
+            return jsonify({"user_list":user_list,"amount":len(user_list)}),200
 
         
     except Exception as e:

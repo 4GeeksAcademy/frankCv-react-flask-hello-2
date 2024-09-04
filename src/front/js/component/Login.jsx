@@ -25,10 +25,10 @@ const Login =()=>{
             <h1>Login</h1>
             <form onSubmit={handleLogin}>               
                 <label htmlFor="email">Email</label>
-                <input name="email" value={data.email} id="email" type="email" onChange={handlerData}/>
+                <input name="email" value={data.email} type="email" onChange={handlerData}/>
                 <br />
                 <label htmlFor="password">Password</label>
-                <input name="password" value={data.password} id="password" type="password" onChange={handlerData}/>
+                <input name="password" value={data.password}type="password" onChange={handlerData}/>
                 <br />
                 <button className="btn btn-success" type="submit">Log in</button>
             </form>

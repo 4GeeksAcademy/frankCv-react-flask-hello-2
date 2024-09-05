@@ -6,13 +6,12 @@ const Logout =()=>{
     const {actions}=useContext(Context)
 
     return (
-        <div>
-            <h1>Logout</h1>
+        <div>           
             <button onClick={()=>{
                 localStorage.setItem('token',"")
                 localStorage.setItem('email',"")  
                 actions.logoutHandler()      
-            }}>LOG OUT</button>
+            }}>Log Out</button>
         </div>
     )
 }

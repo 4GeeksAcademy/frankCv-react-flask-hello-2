@@ -20,6 +20,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 		actions: {
 			// Use getActions to call a function within a fuction
 			register: async(data)=>{
+				console.log(data)
 				try{
 					const resp = await fetch("https://stunning-cod-rvxjvjvxwg63p5px-3001.app.github.dev/api/register",{
 						method: 'POST',

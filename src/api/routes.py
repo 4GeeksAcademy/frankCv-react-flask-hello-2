@@ -30,15 +30,18 @@ def handle_register():
         name = request.json.get("name")
         email = request.json.get("email")
         password = request.json.get("password")
+        last_name = request.json.get("last_name")       
+        address = request.json.get("address")
+        phone = request.json.get("phone")
 
-        if not name or not email or not password:
-            return jsonify({"msg":"All fields are required (name,email,password)"}),400
+        if not name or not email or not password or not last_name or not address or not phone:
+            return jsonify({"msg":"All fields are required (name,email,password, last_name, address,phone)"}),400
         
         existing_user = User.query.filter_by(email=email).first()
         if existing_user:
             return jsonify({"msg":"Another user is already using that email"}),404
         hash_password=bcrypt.generate_password_hash(password).decode("utf-8")
-        user_created = User(name=name,email=email,password=hash_password)
+        user_created = User(name=name,email=email,password=hash_password,last_name=last_name,address=address,phone=phone)
 
         db.session.add(user_created)
         db.session.commit()
@@ -76,6 +79,7 @@ def show_users():
                 user_dict = {
                     "id":user.id,
                     "email":user.email,
+                    "last_name":user.last_name,
                     "name":user.name
                 }
                 user_list.append(user_dict)

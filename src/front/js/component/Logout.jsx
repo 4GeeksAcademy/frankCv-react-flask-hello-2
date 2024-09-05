@@ -8,8 +8,7 @@ const Logout =()=>{
     return (
         <div>           
             <button onClick={()=>{
-                localStorage.setItem('token',"")
-                localStorage.setItem('email',"")  
+                localStorage.clear() 
                 actions.logoutHandler()      
             }}>Log Out</button>
         </div>

@@ -15,7 +15,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				}
 			],
 			userList:[],
-			isLoged:false
+			isLog:false
 		},
 		actions: {
 			// Use getActions to call a function within a fuction
@@ -54,6 +54,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 						console.log(data.token,data.email)
 						localStorage.setItem("token",data.token)
 						localStorage.setItem("email",data.email)
+						setStore({...getStore,'isLog':true})
 					} else{
 						console.log("wrong fetch register")
 						return null
@@ -87,7 +88,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 				}
 			},
 			logoutHandler: ()=>{
-				setStore({...getStore,"userList":[]})
+				setStore({...getStore,"userList":[],"isLog":false})
+				
 			}
 		}
 	};

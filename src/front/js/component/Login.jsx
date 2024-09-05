@@ -3,7 +3,7 @@ import { Context } from "../store/appContext.js";
 import Logout from "./Logout.jsx";
 
 const Login = () => {
-    const { actions } = useContext(Context);
+    const { store,actions } = useContext(Context);
     const [data, setData] = useState({
         "email": "",
         "password": ""
@@ -13,6 +13,7 @@ const Login = () => {
         e.preventDefault();
         try {
             await actions.login(data)
+            actions.set
         } catch (e) {
             console.error(e)
         }

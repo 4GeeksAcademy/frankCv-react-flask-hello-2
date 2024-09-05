@@ -10,7 +10,7 @@ export const Home = () => {
 	const { store, actions } = useContext(Context);
 
 	return (
-		<div className="d-flex flex-column text-center mt-5 align-items-center">			
+		<div className="d-flex flex-column text-center mt-5 align-items-center">	
 			<Login/>	
 			<LoginFooter/>
 		</div>
